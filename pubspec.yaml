@@ -1,0 +1,31 @@
+name: motoboy_app_project
+description: A sample command-line application.
+version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: ^3.4.1
+
+# Add regular dependencies here.
+dependencies:
+  flutter:
+    sdk: flutter
+  # Navigation and dependency injection.
+  flutter_modular: ^6.3.4
+
+  # Cross-platform path manipulation library for Dart.
+  path: ^1.9.0
+
+  # Contains classes and methods for data persistence in SQLite.
+  sqflite: ^2.3.3+1
+
+  # Sends latest version of sqlite along with the app.
+  sqlite3_flutter_libs: ^0.5.24
+
+dev_dependencies:
+  lints: ^3.0.0
+  flutter_test:
+    sdk: flutter
+
+  # (FFI Dart) Allows mocking sqflite during flutter regular unit testing.
+  sqflite_common_ffi: ^2.3.3
