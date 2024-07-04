@@ -3,5 +3,5 @@ abstract interface class IDao<T> {
   Future<T?> getById({required int id});
   Future<List<Map>?> getAll();
   Future<int> update({required T data});
-  Future<void> delete({required int id});
+  Future<int> delete({required T data});
 }

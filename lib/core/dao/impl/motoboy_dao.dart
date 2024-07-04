@@ -36,7 +36,7 @@ class MotoboyDao implements IDao<MotoboyModel> {
   }
 
   @override
-  Future<void> delete({required int id}) {
+  Future<int> delete({required MotoboyModel data}) {
     throw UnimplementedError();
   }
 }

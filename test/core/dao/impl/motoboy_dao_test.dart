@@ -48,8 +48,10 @@ class MotoboyDao implements IDao<MotoboyModel> {
     var list = <Map>[];
     list = await database.rawQuery('SELECT * FROM motoboy');
     if (list.isNotEmpty) {
+      database.close();
       return list;
     }
+    database.close();
     return null;
   }
 
@@ -60,12 +62,19 @@ class MotoboyDao implements IDao<MotoboyModel> {
       "UPDATE motoboy SET mot_email = ?, mot_image = ? WHERE mot_name = ?",
       [data.mot_email, data.mot_image, data.mot_name],
     );
+    database.close();
     return id;
   }
 
   @override
-  Future<void> delete({required int id}) {
-    throw UnimplementedError();
+  Future<int> delete({required MotoboyModel data}) async {
+    Database database = await connection.connectionDatabase();
+    int id = await database.rawDelete(
+      "DELETE FROM motoboy WHERE mot_name = ?",
+      [data.mot_name],
+    );
+    database.close();
+    return id;
   }
 }
 
@@ -119,6 +128,16 @@ void main() {
         mot_image: Uint8List.fromList(
           [4, 3, 2, 1],
         ),
+      ),
+    );
+    print(id);
+    expect(id, isNonZero);
+  });
+
+  test('You must exclude a motoboy', () async {
+    int id = await motoboyDao.delete(
+      data: MotoboyModel(
+        mot_name: 'Ricardo Cardoso',
       ),
     );
     print(id);
