@@ -11,14 +11,14 @@ import 'package:motoboy_app_project/features/motoboy/model/motoboy_model.dart';
 import 'package:motoboy_app_project/main.dart';
 
 class MotoboyDao implements IDao<MotoboyModel> {
+  final connection = Modular.get<ConnectionSQlite>();
+
   @override
   Future<int> insert({required MotoboyModel data}) async {
-    final connection = Modular.get<ConnectionSQlite>();
     Database database = await connection.connectionDatabase();
-
-    int lastId = await database.insert(
-      'motoboy',
-      data.toMap(),
+    int lastId = await database.rawInsert(
+      "INSERT INTO motoboy(mot_name, mot_email, mot_image) VALUES (?, ?, ?)",
+      [data.mot_name, data.mot_email, data.mot_image],
     );
 
     database.close();
@@ -27,8 +27,19 @@ class MotoboyDao implements IDao<MotoboyModel> {
   }
 
   @override
-  Future<MotoboyModel?> getById({required int id}) {
-    throw UnimplementedError();
+  Future<MotoboyModel?> getById({required int id}) async {
+    Database database = await connection.connectionDatabase();
+    var result = await database.rawQuery(
+      "SELECT * FROM motoboy WHERE mot_id = ?",
+      [id],
+    );
+
+    if (result.isNotEmpty) {
+      database.close();
+      return MotoboyModel.fromMap(result.first);
+    }
+    database.close();
+    return null;
   }
 
   @override
@@ -48,16 +59,17 @@ class MotoboyDao implements IDao<MotoboyModel> {
 }
 
 void main() {
+  Modular.bindModule(AppModule());
+
   setUpAll(() {
     // Initialize FFI
     sqfliteFfiInit();
     // Change the default factory
     databaseFactory = databaseFactoryFfi;
-    Modular.bindModule(AppModule());
   });
 
   MotoboyModel motoboy = MotoboyModel(
-    mot_name: 'Ricardo Cardoso Pompêo',
+    mot_name: 'Ricardo Cardoso Pompêo rcdo',
     mot_email: 'rcdo.dev@gmail.com',
     mot_image: Uint8List.fromList([0, 1, 2, 3, 4]),
   );
@@ -70,6 +82,15 @@ void main() {
       int lastId = await motoboyDao.insert(data: motoboy);
       print(lastId);
       expect(lastId, isNonZero);
+    },
+  );
+
+  test(
+    'Must return a MotoboyModel object after performing a database query',
+    () async {
+      var motoboy = await motoboyDao.getById(id: 4);
+      print(motoboy?.mot_name);
+      expect(motoboy, isA<MotoboyModel>());
     },
   );
 }
