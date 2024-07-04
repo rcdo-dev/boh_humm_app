@@ -89,7 +89,7 @@ void main() {
   });
 
   MotoboyModel motoboy = MotoboyModel(
-    mot_name: 'Ricardo Cardoso Pompêo rcdo',
+    mot_name: 'Ricardo Cardoso Pompêo rcdo.dev',
     mot_email: 'rcdo.dev@gmail.com',
     mot_image: Uint8List.fromList([0, 1, 2, 3, 4]),
   );
