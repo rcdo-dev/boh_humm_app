@@ -43,8 +43,14 @@ class MotoboyDao implements IDao<MotoboyModel> {
   }
 
   @override
-  Future<List<Map>> getAll() {
-    throw UnimplementedError();
+  Future<List<Map>?> getAll() async {
+    Database database = await connection.connectionDatabase();
+    var list = <Map>[];
+    list = await database.rawQuery('SELECT * FROM motoboy');
+    if (list.isNotEmpty) {
+      return list;
+    }
+    return null;
   }
 
   @override
@@ -93,4 +99,10 @@ void main() {
       expect(motoboy, isA<MotoboyModel>());
     },
   );
+
+  test('It must return a list with the data of the motoboys', () async {
+    var list = await motoboyDao.getAll();
+    print(list);
+    expect(list, isA<List<Map>>());
+  });
 }
