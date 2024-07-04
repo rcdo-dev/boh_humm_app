@@ -54,8 +54,13 @@ class MotoboyDao implements IDao<MotoboyModel> {
   }
 
   @override
-  Future<void> update({required MotoboyModel data}) {
-    throw UnimplementedError();
+  Future<int> update({required MotoboyModel data}) async {
+    Database database = await connection.connectionDatabase();
+    int id = await database.rawUpdate(
+      "UPDATE motoboy SET mot_email = ?, mot_image = ? WHERE mot_name = ?",
+      [data.mot_email, data.mot_image, data.mot_name],
+    );
+    return id;
   }
 
   @override
@@ -104,5 +109,19 @@ void main() {
     var list = await motoboyDao.getAll();
     print(list);
     expect(list, isA<List<Map>>());
+  });
+
+  test('Must update the email and image of the motoboy', () async {
+    int id = await motoboyDao.update(
+      data: MotoboyModel(
+        mot_name: 'Ricardo',
+        mot_email: 'rcpompeo@gmail.com',
+        mot_image: Uint8List.fromList(
+          [4, 3, 2, 1],
+        ),
+      ),
+    );
+    print(id);
+    expect(id, isNonZero);
   });
 }

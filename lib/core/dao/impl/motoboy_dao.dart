@@ -31,7 +31,7 @@ class MotoboyDao implements IDao<MotoboyModel> {
   }
 
   @override
-  Future<void> update({required MotoboyModel data}) {
+  Future<int> update({required MotoboyModel data}) {
     throw UnimplementedError();
   }
 
