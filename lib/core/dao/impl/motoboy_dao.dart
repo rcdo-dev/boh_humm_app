@@ -1,18 +1,20 @@
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:sqflite/sqflite.dart';
+
 import 'package:motoboy_app_project/core/connection_db/connection_sqlite.dart';
 import 'package:motoboy_app_project/core/dao/i_dao.dart';
 import 'package:motoboy_app_project/features/motoboy/model/motoboy_model.dart';
-import 'package:sqflite/sqflite.dart';
 
 class MotoboyDao implements IDao<MotoboyModel> {
+  final connection = Modular.get<ConnectionSQlite>();
+
   @override
   Future<int> insert({required MotoboyModel data}) async {
-    final connection = Modular.get<ConnectionSQlite>();
     Database database = await connection.connectionDatabase();
-
-    int lastId = await database.insert(
-      'motoboy',
-      data.toMap(),
+    int lastId = await database.rawInsert(
+      "INSERT INTO motoboy(mot_name, mot_email, mot_image) VALUES (?, ?, ?)",
+      [data.mot_name, data.mot_email, data.mot_image],
     );
 
     database.close();
@@ -21,22 +23,53 @@ class MotoboyDao implements IDao<MotoboyModel> {
   }
 
   @override
-  Future<MotoboyModel?> getById({required int id}) {
-    throw UnimplementedError();
+  Future<MotoboyModel?> getById({required int id}) async {
+    Database database = await connection.connectionDatabase();
+    var result = await database.rawQuery(
+      "SELECT * FROM motoboy WHERE mot_id = ?",
+      [id],
+    );
+
+    if (result.isNotEmpty) {
+      database.close();
+      return MotoboyModel.fromMap(result.first);
+    }
+    database.close();
+    return null;
   }
 
   @override
-  Future<List<Map>> getAll() {
-    throw UnimplementedError();
+  Future<List<Map>?> getAll() async {
+    Database database = await connection.connectionDatabase();
+    var list = <Map>[];
+    list = await database.rawQuery('SELECT * FROM motoboy');
+    if (list.isNotEmpty) {
+      database.close();
+      return list;
+    }
+    database.close();
+    return null;
   }
 
   @override
-  Future<int> update({required MotoboyModel data}) {
-    throw UnimplementedError();
+  Future<int> update({required MotoboyModel data}) async {
+    Database database = await connection.connectionDatabase();
+    int id = await database.rawUpdate(
+      "UPDATE motoboy SET mot_email = ?, mot_image = ? WHERE mot_name = ?",
+      [data.mot_email, data.mot_image, data.mot_name],
+    );
+    database.close();
+    return id;
   }
 
   @override
-  Future<int> delete({required MotoboyModel data}) {
-    throw UnimplementedError();
+  Future<int> delete({required MotoboyModel data}) async {
+    Database database = await connection.connectionDatabase();
+    int id = await database.rawDelete(
+      "DELETE FROM motoboy WHERE mot_name = ?",
+      [data.mot_name],
+    );
+    database.close();
+    return id;
   }
 }
