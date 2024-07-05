@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'package:motoboy_app_project/core/connection_db/interface/i_connection_db.dart';
+import 'package:motoboy_app_project/core/connection_db/i_connection_db.dart';
 
 class ConnectionSQlite implements IConnectionDb<Database> {
   @override
