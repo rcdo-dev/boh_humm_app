@@ -33,21 +33,28 @@ class MotoboyDao implements IDao<MotoboyModel> {
       database.close();
       print('Exception: $e, StackTrace: $s');
     }
-
+    database.close();
     return null;
   }
 
   @override
   Future<MotoboyModel?> getById({required int id}) async {
     Database database = await connection.connectionDatabase();
-    var result = await database.rawQuery(
-      "SELECT * FROM motoboy WHERE mot_id = ?",
-      [id],
-    );
 
-    if (result.isNotEmpty) {
+    try {
+      var result = await database.rawQuery(
+        "SELECT * FROM motoboy WHERE mot_id = ?",
+        [id],
+      );
+
+      if (result.isNotEmpty) {
+        database.close();
+        return MotoboyModel.fromMap(result.first);
+      }
       database.close();
-      return MotoboyModel.fromMap(result.first);
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
     }
     database.close();
     return null;
@@ -57,35 +64,58 @@ class MotoboyDao implements IDao<MotoboyModel> {
   Future<List<Map>?> getAll() async {
     Database database = await connection.connectionDatabase();
     var list = <Map>[];
-    list = await database.rawQuery('SELECT * FROM motoboy');
-    if (list.isNotEmpty) {
+
+    try {
+      list = await database.rawQuery('SELECT * FROM motoboy');
+      if (list.isNotEmpty) {
+        database.close();
+        return list;
+      }
       database.close();
-      return list;
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
     }
     database.close();
     return null;
   }
 
   @override
-  Future<int> update({required MotoboyModel data}) async {
+  Future<int?> update({required MotoboyModel data}) async {
     Database database = await connection.connectionDatabase();
-    int id = await database.rawUpdate(
-      "UPDATE motoboy SET mot_email = ?, mot_image = ? WHERE mot_name = ?",
-      [data.mot_email, data.mot_image, data.mot_name],
-    );
+
+    try {
+      int id = await database.rawUpdate(
+        "UPDATE motoboy SET mot_email = ?, mot_image = ? WHERE mot_name = ?",
+        [data.mot_email, data.mot_image, data.mot_name],
+      );
+      database.close();
+      return id;
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
+    }
     database.close();
-    return id;
+    return null;
   }
 
   @override
-  Future<int> delete({required MotoboyModel data}) async {
+  Future<int?> delete({required MotoboyModel data}) async {
     Database database = await connection.connectionDatabase();
-    int id = await database.rawDelete(
-      "DELETE FROM motoboy WHERE mot_name = ?",
-      [data.mot_name],
-    );
+
+    try {
+      int id = await database.rawDelete(
+        "DELETE FROM motoboy WHERE mot_name = ?",
+        [data.mot_name],
+      );
+      database.close();
+      return id;
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
+    }
     database.close();
-    return id;
+    return null;
   }
 }
 
@@ -133,7 +163,7 @@ void main() {
   });
 
   test('Must update the email and image of the motoboy', () async {
-    int id = await motoboyDao.update(
+    var id = await motoboyDao.update(
       data: MotoboyModel(
         mot_name: 'Ricardo',
         mot_email: 'rcpompeo@gmail.com',
@@ -147,7 +177,7 @@ void main() {
   });
 
   test('You must exclude a motoboy', () async {
-    int id = await motoboyDao.delete(
+    var id = await motoboyDao.delete(
       data: MotoboyModel(
         mot_name: 'Ricardo Cardoso',
       ),

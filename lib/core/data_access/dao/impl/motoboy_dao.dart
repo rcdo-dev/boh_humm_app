@@ -93,13 +93,21 @@ class MotoboyDao implements IDao<MotoboyModel> {
   }
 
   @override
-  Future<int> delete({required MotoboyModel data}) async {
+  Future<int?> delete({required MotoboyModel data}) async {
     Database database = await connection.connectionDatabase();
-    int id = await database.rawDelete(
-      "DELETE FROM motoboy WHERE mot_name = ?",
-      [data.mot_name],
-    );
+
+    try {
+      int id = await database.rawDelete(
+        "DELETE FROM motoboy WHERE mot_name = ?",
+        [data.mot_name],
+      );
+      database.close();
+      return id;
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
+    }
     database.close();
-    return id;
+    return null;
   }
 }

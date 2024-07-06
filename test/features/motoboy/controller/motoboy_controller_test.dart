@@ -32,6 +32,10 @@ class MotoboyController {
   Future<int?> updateMotoboy({required MotoboyModel motoboy}) async {
     return await _dao.update(data: motoboy);
   }
+
+  Future<int?> deleteMotoboy({required MotoboyModel motoboy}) async {
+    return await _dao.delete(data: motoboy);
+  }
 }
 
 void main() {
@@ -72,9 +76,16 @@ void main() {
     expect(list, isNotEmpty);
   });
 
-  test('Must update a motorcycle courier through the controller class',
+  test('Must update a motoboy through the controller class',
       () async {
     var id = await controller.updateMotoboy(motoboy: motoboy);
+    print(id);
+    expect(id, isNotNull);
+  });
+
+  test('Must exclude a motoboy through the controller class',
+      () async {
+    var id = await controller.deleteMotoboy(motoboy: motoboy);
     print(id);
     expect(id, isNotNull);
   });
