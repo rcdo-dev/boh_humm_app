@@ -26,21 +26,28 @@ class MotoboyDao implements IDao<MotoboyModel> {
       database.close();
       print('Exception: $e, StackTrace: $s');
     }
-
+    database.close();
     return null;
   }
 
   @override
   Future<MotoboyModel?> getById({required int id}) async {
     Database database = await connection.connectionDatabase();
-    var result = await database.rawQuery(
-      "SELECT * FROM motoboy WHERE mot_id = ?",
-      [id],
-    );
 
-    if (result.isNotEmpty) {
+    try {
+      var result = await database.rawQuery(
+        "SELECT * FROM motoboy WHERE mot_id = ?",
+        [id],
+      );
+
+      if (result.isNotEmpty) {
+        database.close();
+        return MotoboyModel.fromMap(result.first);
+      }
       database.close();
-      return MotoboyModel.fromMap(result.first);
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
     }
     database.close();
     return null;

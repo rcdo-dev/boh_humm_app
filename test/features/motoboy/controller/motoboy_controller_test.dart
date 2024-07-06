@@ -1,12 +1,14 @@
 import 'dart:typed_data';
 
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
 import 'package:motoboy_app_project/core/data_access/dao/i_dao.dart';
 import 'package:motoboy_app_project/core/data_access/dao/impl/motoboy_dao.dart';
 import 'package:motoboy_app_project/features/motoboy/model/motoboy_model.dart';
 import 'package:motoboy_app_project/main.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class MotoboyController {
   final IDao _dao;
@@ -17,6 +19,10 @@ class MotoboyController {
 
   Future<int?> saveMotoboy({required MotoboyModel motoboy}) async {
     return await _dao.insert(data: motoboy);
+  }
+
+  Future<MotoboyModel?> getMotoboyById({required int id}) async {
+    return await _dao.getById(id: id);
   }
 }
 
@@ -38,9 +44,16 @@ void main() {
 
   final motoboyDao = Modular.get<MotoboyDao>();
   MotoboyController controller = MotoboyController(motoboyDao);
+  final int idMotoboy = 3;
 
   test('Must save a motoboy through the controller class', () async {
     int? lastId = await controller.saveMotoboy(motoboy: motoboy);
     expect(lastId, isNotNull);
+  });
+
+  test('Must return a motoboy per id through the controlle class', () async {
+    final motoboyModel = await controller.getMotoboyById(id: idMotoboy);
+    print(motoboyModel?.mot_name);
+    expect(motoboyModel, isA<MotoboyModel>());
   });
 }
