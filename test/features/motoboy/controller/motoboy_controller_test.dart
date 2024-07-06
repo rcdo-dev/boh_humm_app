@@ -24,6 +24,10 @@ class MotoboyController {
   Future<MotoboyModel?> getMotoboyById({required int id}) async {
     return await _dao.getById(id: id);
   }
+
+  Future<List<Map>?> getAllMotoboys() async {
+    return await _dao.getAll();
+  }
 }
 
 void main() {
@@ -47,13 +51,20 @@ void main() {
   final int idMotoboy = 3;
 
   test('Must save a motoboy through the controller class', () async {
-    int? lastId = await controller.saveMotoboy(motoboy: motoboy);
+    var lastId = await controller.saveMotoboy(motoboy: motoboy);
     expect(lastId, isNotNull);
   });
 
   test('Must return a motoboy per id through the controlle class', () async {
-    final motoboyModel = await controller.getMotoboyById(id: idMotoboy);
+    var motoboyModel = await controller.getMotoboyById(id: idMotoboy);
     print(motoboyModel?.mot_name);
     expect(motoboyModel, isA<MotoboyModel>());
+  });
+
+  test('It must return a list of all motoboys through the controlle class',
+      () async {
+    var list = await controller.getAllMotoboys();
+    print(list?.first);
+    expect(list, isNotEmpty);
   });
 }

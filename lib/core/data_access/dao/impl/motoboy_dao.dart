@@ -57,10 +57,17 @@ class MotoboyDao implements IDao<MotoboyModel> {
   Future<List<Map>?> getAll() async {
     Database database = await connection.connectionDatabase();
     var list = <Map>[];
-    list = await database.rawQuery('SELECT * FROM motoboy');
-    if (list.isNotEmpty) {
+
+    try {
+      list = await database.rawQuery('SELECT * FROM motoboy');
+      if (list.isNotEmpty) {
+        database.close();
+        return list;
+      }
       database.close();
-      return list;
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
     }
     database.close();
     return null;
