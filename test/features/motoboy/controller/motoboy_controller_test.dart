@@ -28,6 +28,10 @@ class MotoboyController {
   Future<List<Map>?> getAllMotoboys() async {
     return await _dao.getAll();
   }
+
+  Future<int?> updateMotoboy({required MotoboyModel motoboy}) async {
+    return await _dao.update(data: motoboy);
+  }
 }
 
 void main() {
@@ -42,7 +46,7 @@ void main() {
 
   MotoboyModel motoboy = MotoboyModel(
     mot_name: 'moto4',
-    mot_email: 'moto4@email.com',
+    mot_email: 'moto4.moto@email.com',
     mot_image: Uint8List.fromList([4, 5, 6, 7]),
   );
 
@@ -55,16 +59,23 @@ void main() {
     expect(lastId, isNotNull);
   });
 
-  test('Must return a motoboy per id through the controlle class', () async {
+  test('Must return a motoboy per id through the controller class', () async {
     var motoboyModel = await controller.getMotoboyById(id: idMotoboy);
     print(motoboyModel?.mot_name);
     expect(motoboyModel, isA<MotoboyModel>());
   });
 
-  test('It must return a list of all motoboys through the controlle class',
+  test('It must return a list of all motoboys through the controller class',
       () async {
     var list = await controller.getAllMotoboys();
     print(list?.first);
     expect(list, isNotEmpty);
+  });
+
+  test('Must update a motorcycle courier through the controller class',
+      () async {
+    var id = await controller.updateMotoboy(motoboy: motoboy);
+    print(id);
+    expect(id, isNotNull);
   });
 }

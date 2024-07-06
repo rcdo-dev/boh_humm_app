@@ -74,14 +74,22 @@ class MotoboyDao implements IDao<MotoboyModel> {
   }
 
   @override
-  Future<int> update({required MotoboyModel data}) async {
+  Future<int?> update({required MotoboyModel data}) async {
     Database database = await connection.connectionDatabase();
-    int id = await database.rawUpdate(
-      "UPDATE motoboy SET mot_email = ?, mot_image = ? WHERE mot_name = ?",
-      [data.mot_email, data.mot_image, data.mot_name],
-    );
+
+    try {
+      int id = await database.rawUpdate(
+        "UPDATE motoboy SET mot_email = ?, mot_image = ? WHERE mot_name = ?",
+        [data.mot_email, data.mot_image, data.mot_name],
+      );
+      database.close();
+      return id;
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
+    }
     database.close();
-    return id;
+    return null;
   }
 
   @override
