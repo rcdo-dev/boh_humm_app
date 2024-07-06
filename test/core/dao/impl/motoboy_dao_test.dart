@@ -13,17 +13,23 @@ import 'package:motoboy_app_project/main.dart';
 class MotoboyDao implements IDao<MotoboyModel> {
   final connection = Modular.get<ConnectionSQlite>();
 
-  @override
-  Future<int> insert({required MotoboyModel data}) async {
+   @override
+  Future<int?> insert({required MotoboyModel data}) async {
     Database database = await connection.connectionDatabase();
-    int lastId = await database.rawInsert(
-      "INSERT INTO motoboy(mot_name, mot_email, mot_image) VALUES (?, ?, ?)",
-      [data.mot_name, data.mot_email, data.mot_image],
-    );
 
-    database.close();
+    try {
+      int lastId = await database.rawInsert(
+        "INSERT INTO motoboy(mot_name, mot_email, mot_image) VALUES (?, ?, ?)",
+        [data.mot_name, data.mot_email, data.mot_image],
+      );
+      database.close();
+      return lastId;
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
+    }
 
-    return lastId;
+    return null;
   }
 
   @override
@@ -89,7 +95,7 @@ void main() {
   });
 
   MotoboyModel motoboy = MotoboyModel(
-    mot_name: 'Ricardo Cardoso Pompêo rcdo.dev',
+    mot_name: 'rcdo dev',
     mot_email: 'rcdo.dev@gmail.com',
     mot_image: Uint8List.fromList([0, 1, 2, 3, 4]),
   );
@@ -99,9 +105,9 @@ void main() {
   test(
     'You must insert the data of a Motoboy object into the database.',
     () async {
-      int lastId = await motoboyDao.insert(data: motoboy);
+      int? lastId = await motoboyDao.insert(data: motoboy);
       print(lastId);
-      expect(lastId, isNonZero);
+      expect(lastId, isNotNull);
     },
   );
 

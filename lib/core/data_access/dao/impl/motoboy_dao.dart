@@ -10,16 +10,22 @@ class MotoboyDao implements IDao<MotoboyModel> {
   final connection = Modular.get<ConnectionSQlite>();
 
   @override
-  Future<int> insert({required MotoboyModel data}) async {
+  Future<int?> insert({required MotoboyModel data}) async {
     Database database = await connection.connectionDatabase();
-    int lastId = await database.rawInsert(
-      "INSERT INTO motoboy(mot_name, mot_email, mot_image) VALUES (?, ?, ?)",
-      [data.mot_name, data.mot_email, data.mot_image],
-    );
 
-    database.close();
+    try {
+      int lastId = await database.rawInsert(
+        "INSERT INTO motoboy(mot_name, mot_email, mot_image) VALUES (?, ?, ?)",
+        [data.mot_name, data.mot_email, data.mot_image],
+      );
+      database.close();
+      return lastId;
+    } catch (e, s) {
+      database.close();
+      print('Exception: $e, StackTrace: $s');
+    }
 
-    return lastId;
+    return null;
   }
 
   @override
