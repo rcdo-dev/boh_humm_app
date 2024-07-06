@@ -2,8 +2,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:sqflite/sqflite.dart';
 
-import 'package:motoboy_app_project/core/connection_db/impl/connection_sqlite.dart';
-import 'package:motoboy_app_project/core/dao/i_dao.dart';
+import 'package:motoboy_app_project/core/data_access/connection_db/impl/connection_sqlite.dart';
+import 'package:motoboy_app_project/core/data_access/dao/i_dao.dart';
 import 'package:motoboy_app_project/features/motoboy/model/motoboy_model.dart';
 
 class MotoboyDao implements IDao<MotoboyModel> {
