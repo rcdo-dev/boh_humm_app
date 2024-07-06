@@ -5,15 +5,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
+import 'package:motoboy_app_project/core/data_access/connection_db/i_connection_db.dart';
 import 'package:motoboy_app_project/core/data_access/connection_db/impl/connection_sqlite.dart';
 import 'package:motoboy_app_project/core/data_access/dao/i_dao.dart';
 import 'package:motoboy_app_project/features/motoboy/model/motoboy_model.dart';
 import 'package:motoboy_app_project/main.dart';
 
 class MotoboyDao implements IDao<MotoboyModel> {
-  final connection = Modular.get<ConnectionSQlite>();
+  final IConnectionDb connection;
 
-   @override
+  MotoboyDao({
+    required this.connection,
+  });
+
+  @override
   Future<int?> insert({required MotoboyModel data}) async {
     Database database = await connection.connectionDatabase();
 
@@ -100,7 +105,8 @@ void main() {
     mot_image: Uint8List.fromList([0, 1, 2, 3, 4]),
   );
 
-  MotoboyDao motoboyDao = MotoboyDao();
+  final connection = Modular.get<ConnectionSQlite>();
+  MotoboyDao motoboyDao = MotoboyDao(connection: connection);
 
   test(
     'You must insert the data of a Motoboy object into the database.',

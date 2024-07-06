@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:motoboy_app_project/app_widget.dart';
+import 'package:motoboy_app_project/core/data_access/connection_db/i_connection_db.dart';
 import 'package:motoboy_app_project/core/data_access/connection_db/impl/connection_sqlite.dart';
+import 'package:motoboy_app_project/core/data_access/dao/impl/motoboy_dao.dart';
 import 'package:motoboy_app_project/features/home/home_module.dart';
 
 void main() {
@@ -17,7 +19,8 @@ void main() {
 class AppModule extends Module {
   @override
   void binds(Injector i) {
-    i.addSingleton(ConnectionSQlite.new);
+    i.addSingleton<IConnectionDb>(ConnectionSQlite.new);
+    i.addSingleton(MotoboyDao.new);
   }
 
   @override
