@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.motoboy_app_project.app-mergeDebugResources-9:/values/values.xml",
+            "outputFile": "com.example.boh_humm.app-mergeDebugResources-9:/values/values.xml",
             "map": [
                 {
                     "source": "/home/rcdo/.gradle/caches/transforms-3/f302e75fb7efd781bcf1a29281c188da/transformed/jetified-window-1.0.0-beta04/res/values/values.xml",
@@ -42,7 +42,7 @@
                     }
                 },
                 {
-                    "source": "/home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/res/values/styles.xml",
+                    "source": "/home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

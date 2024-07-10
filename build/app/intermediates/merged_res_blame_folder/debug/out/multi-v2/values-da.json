@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.motoboy_app_project.app-mergeDebugResources-9:/values-da/values-da.xml",
+            "outputFile": "com.example.boh_humm.app-mergeDebugResources-9:/values-da/values-da.xml",
             "map": [
                 {
                     "source": "/home/rcdo/.gradle/caches/transforms-3/284a410c767ad6c7a2b0ffc8d8d85981/transformed/core-1.6.0/res/values-da/values-da.xml",

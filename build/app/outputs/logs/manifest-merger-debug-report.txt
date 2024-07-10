@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:2:5-33:19
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:2:5-33:19
 MERGED from [androidx.window:window:1.0.0-beta04] /home/rcdo/.gradle/caches/transforms-3/f302e75fb7efd781bcf1a29281c188da/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.window:window:1.0.0-beta04] /home/rcdo/.gradle/caches/transforms-3/f302e75fb7efd781bcf1a29281c188da/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.core:core:1.6.0] /home/rcdo/.gradle/caches/transforms-3/284a410c767ad6c7a2b0ffc8d8d85981/transformed/core-1.6.0/AndroidManifest.xml:24:5-89
@@ -10,15 +10,15 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rcdo/
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.6.0] /home/rcdo/.gradle/caches/transforms-3/284a410c767ad6c7a2b0ffc8d8d85981/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
 	android:name
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml
 manifest
-ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:1:1-45:12
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:1:1-45:12
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:1:1-45:12
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:1:1-45:12
-MERGED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:1:1-45:12
-MERGED from [:sqflite] /home/rcdo/rcdo_workspace/projects/motoboy_app_project/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:sqlite3_flutter_libs] /home/rcdo/rcdo_workspace/projects/motoboy_app_project/build/sqlite3_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:1:1-45:12
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:1:1-45:12
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:1:1-45:12
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:1:1-45:12
+MERGED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:1:1-45:12
+MERGED from [:sqflite] /home/rcdo/rcdo_workspace/projects/boh_humm/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:sqlite3_flutter_libs] /home/rcdo/rcdo_workspace/projects/boh_humm/build/sqlite3_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] /home/rcdo/.gradle/caches/transforms-3/2a215381204751055df81b6269e717b7/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] /home/rcdo/.gradle/caches/transforms-3/f302e75fb7efd781bcf1a29281c188da/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
 MERGED from [eu.simonbinder:sqlite3-native-library:3.46.0+1] /home/rcdo/.gradle/caches/transforms-3/630be536dfca4534595a11661121837a/transformed/jetified-sqlite3-native-library-3.46.0+1/AndroidManifest.xml:2:1-7:12
@@ -37,43 +37,43 @@ MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/rcdo/.gradle/caches/tr
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rcdo/.gradle/caches/transforms-3/17b52f3ce5be01faa0d2efabbb4c4451/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/rcdo/.gradle/caches/transforms-3/1df962ed8245cc6ecc6dae80a3756f32/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /home/rcdo/.gradle/caches/transforms-3/3d2f03fc996c2e0aa3dee5cfa3002cd1/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml:1:1-7:12
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml:1:1-7:12
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 	package
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:1:1-45:12
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:1:1-45:12
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml
 	android:versionName
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:1:1-45:12
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:1:1-45:12
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:1:1-45:12
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:1:1-45:12
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:1:11-69
+		ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:1:11-69
 queries
-ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:39:5-44:15
+ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:39:5-44:15
 intent#action:name:android.intent.action.PROCESS_TEXT+data:mimeType:text/plain
-ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:40:9-43:18
+ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:40:9-43:18
 action#android.intent.action.PROCESS_TEXT
-ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:41:13-72
+ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:41:13-72
 	android:name
-		ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:41:21-70
+		ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:41:21-70
 data
-ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:42:13-50
+ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:42:13-50
 	android:mimeType
-		ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml:42:19-48
+		ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml:42:19-48
 uses-sdk
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml
-MERGED from [:sqflite] /home/rcdo/rcdo_workspace/projects/motoboy_app_project/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:sqflite] /home/rcdo/rcdo_workspace/projects/motoboy_app_project/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:sqlite3_flutter_libs] /home/rcdo/rcdo_workspace/projects/motoboy_app_project/build/sqlite3_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:sqlite3_flutter_libs] /home/rcdo/rcdo_workspace/projects/motoboy_app_project/build/sqlite3_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml
+MERGED from [:sqflite] /home/rcdo/rcdo_workspace/projects/boh_humm/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:sqflite] /home/rcdo/rcdo_workspace/projects/boh_humm/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:sqlite3_flutter_libs] /home/rcdo/rcdo_workspace/projects/boh_humm/build/sqlite3_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:sqlite3_flutter_libs] /home/rcdo/rcdo_workspace/projects/boh_humm/build/sqlite3_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.window:window-java:1.0.0-beta04] /home/rcdo/.gradle/caches/transforms-3/2a215381204751055df81b6269e717b7/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window-java:1.0.0-beta04] /home/rcdo/.gradle/caches/transforms-3/2a215381204751055df81b6269e717b7/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window:1.0.0-beta04] /home/rcdo/.gradle/caches/transforms-3/f302e75fb7efd781bcf1a29281c188da/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
@@ -110,18 +110,18 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/rcdo/.gradle/ca
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/rcdo/.gradle/caches/transforms-3/1df962ed8245cc6ecc6dae80a3756f32/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /home/rcdo/.gradle/caches/transforms-3/3d2f03fc996c2e0aa3dee5cfa3002cd1/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /home/rcdo/.gradle/caches/transforms-3/3d2f03fc996c2e0aa3dee5cfa3002cd1/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml
-INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml
+INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/main/AndroidManifest.xml
-		INJECTED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml
 uses-permission#android.permission.INTERNET
-ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml:6:5-66
+ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml:6:5-66
 	android:name
-		ADDED from /home/rcdo/rcdo_workspace/projects/motoboy_app_project/android/app/src/debug/AndroidManifest.xml:6:22-64
+		ADDED from /home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/debug/AndroidManifest.xml:6:22-64
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.0.0-beta04] /home/rcdo/.gradle/caches/transforms-3/f302e75fb7efd781bcf1a29281c188da/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 	android:required

@@ -1,5 +1,5 @@
-import 'package:motoboy_app_project/core/data_access/dao/i_dao.dart';
-import 'package:motoboy_app_project/features/motoboy/model/motoboy_model.dart';
+import 'package:boh_humm/core/data_access/dao/i_dao.dart';
+import 'package:boh_humm/features/motoboy/model/motoboy_model.dart';
 
 class MotoboyController {
   final IDao _dao;

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:motoboy_app_project/app_widget.dart';
-import 'package:motoboy_app_project/core/data_access/connection_db/i_connection_db.dart';
-import 'package:motoboy_app_project/core/data_access/connection_db/impl/connection_sqlite.dart';
-import 'package:motoboy_app_project/core/data_access/dao/impl/motoboy_dao.dart';
-import 'package:motoboy_app_project/features/home/home_module.dart';
+import 'package:boh_humm/app_widget.dart';
+import 'package:boh_humm/core/data_access/connection_db/i_connection_db.dart';
+import 'package:boh_humm/core/data_access/connection_db/impl/connection_sqlite.dart';
+import 'package:boh_humm/core/data_access/dao/impl/motoboy_dao.dart';
+import 'package:boh_humm/features/home/home_module.dart';
 
 void main() {
   debugPrint(Modular.to.path);

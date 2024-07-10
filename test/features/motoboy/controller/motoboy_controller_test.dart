@@ -5,10 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-import 'package:motoboy_app_project/core/data_access/dao/i_dao.dart';
-import 'package:motoboy_app_project/core/data_access/dao/impl/motoboy_dao.dart';
-import 'package:motoboy_app_project/features/motoboy/model/motoboy_model.dart';
-import 'package:motoboy_app_project/main.dart';
+import 'package:boh_humm/core/data_access/dao/i_dao.dart';
+import 'package:boh_humm/core/data_access/dao/impl/motoboy_dao.dart';
+import 'package:boh_humm/features/motoboy/model/motoboy_model.dart';
+import 'package:boh_humm/main.dart';
 
 class MotoboyController {
   final IDao _dao;

@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:path/path.dart';
 
-import 'package:motoboy_app_project/core/data_access/connection_db/i_connection_db.dart';
+import 'package:boh_humm/core/data_access/connection_db/i_connection_db.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class ConnectionSQlite implements IConnectionDb<Database> {

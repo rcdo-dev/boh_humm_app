@@ -1,4 +1,4 @@
-com.example.motoboy_app_project
+com.example.boh_humm
 attr activityAction
 attr activityName
 attr alpha

@@ -1,8 +1,8 @@
 import 'package:sqflite/sqflite.dart';
 
-import 'package:motoboy_app_project/core/data_access/connection_db/i_connection_db.dart';
-import 'package:motoboy_app_project/core/data_access/dao/i_dao.dart';
-import 'package:motoboy_app_project/features/motoboy/model/motoboy_model.dart';
+import 'package:boh_humm/core/data_access/connection_db/i_connection_db.dart';
+import 'package:boh_humm/core/data_access/dao/i_dao.dart';
+import 'package:boh_humm/features/motoboy/model/motoboy_model.dart';
 
 class MotoboyDao implements IDao<MotoboyModel> {
   final IConnectionDb connection;

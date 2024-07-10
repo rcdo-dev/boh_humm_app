@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.motoboy_app_project"
+    package="com.example.boh_humm"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -33,9 +33,9 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="motoboy_app_project" >
+        android:label="boh_humm" >
         <activity
-            android:name="com.example.motoboy_app_project.MainActivity"
+            android:name="com.example.boh_humm.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"

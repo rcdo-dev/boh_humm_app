@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:motoboy_app_project/features/motoboy/page/motoboy_page.dart';
+import 'package:boh_humm/features/motoboy/page/motoboy_page.dart';
 
 class MotoboyModule extends Module {
   @override

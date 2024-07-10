@@ -1,4 +1,4 @@
-import 'package:motoboy_app_project/features/model/delivery_model.dart';
+import 'package:boh_humm/features/model/delivery_model.dart';
 
 class DeliveryRouteModel {
   final int? identifier;

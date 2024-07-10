@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "motoboy_app_project",
+            "name": "boh_humm",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "motoboy_app_project (profile mode)",
+            "name": "boh_humm (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "motoboy_app_project (release mode)",
+            "name": "boh_humm (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
