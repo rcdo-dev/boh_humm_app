@@ -58,7 +58,7 @@ void main() {
   MotoboyController controller = MotoboyController(motoboyDao);
   final int idMotoboy = 3;
 
-  group('CRUD motoboy by controller class', () {
+  group('CRUD motoboy by Controller class', () {
     test('Must save a motoboy through the controller class', () async {
       var lastId = await controller.saveMotoboy(motoboy: motoboy);
       expect(lastId, isNotNull);

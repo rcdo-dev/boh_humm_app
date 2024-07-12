@@ -6,7 +6,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'package:boh_humm/core/data_access/connection_db/i_connection_db.dart';
-import 'package:boh_humm/core/data_access/connection_db/impl/connection_sqlite.dart';
 import 'package:boh_humm/core/data_access/dao/i_dao.dart';
 import 'package:boh_humm/features/motoboy/model/motoboy_model.dart';
 import 'package:boh_humm/main.dart';
@@ -123,66 +122,72 @@ void main() {
   Modular.bindModule(AppModule());
 
   setUpAll(() {
-    // Initialize FFI
+    // Initialize sqflite_common_ffi
     sqfliteFfiInit();
-    // Change the default factory
+    // Tells sqflite to use the database factory provided by sqflite_common_ffi
     databaseFactory = databaseFactoryFfi;
   });
 
   MotoboyModel motoboy = MotoboyModel(
-    mot_name: 'rcdo dev',
-    mot_email: 'rcdo.dev@gmail.com',
+    mot_name: 'rcdo2 dev',
+    mot_email: 'rcdo2.dev@gmail.com',
     mot_image: Uint8List.fromList([0, 1, 2, 3, 4]),
   );
 
-  final connection = Modular.get<ConnectionSQlite>();
+  final connection = Modular.get<IConnectionDb>();
   MotoboyDao motoboyDao = MotoboyDao(connection: connection);
 
-  test(
-    'You must insert the data of a Motoboy object into the database.',
-    () async {
-      int? lastId = await motoboyDao.insert(data: motoboy);
-      print(lastId);
-      expect(lastId, isNotNull);
-    },
-  );
+  group('CRUD Motoboy by MotoboyDao class', () {
+    test(
+      'You must insert the data of a Motoboy object into the database.',
+      () async {
+        int? lastId = await motoboyDao.insert(data: motoboy);
+        print(lastId);
+        expect(lastId, isNotNull);
+      },
+    );
 
-  test(
-    'Must return a MotoboyModel object after performing a database query',
-    () async {
-      var motoboy = await motoboyDao.getById(id: 4);
-      print(motoboy?.mot_name);
-      expect(motoboy, isA<MotoboyModel>());
-    },
-  );
+    test(
+      'Must return a MotoboyModel object after performing a database query',
+      () async {
+        var motoboy = await motoboyDao.getById(id: 4);
+        print(motoboy?.mot_name);
+        expect(motoboy, isA<MotoboyModel>());
+      },
+    );
 
-  test('It must return a list with the data of the motoboys', () async {
-    var list = await motoboyDao.getAll();
-    print(list);
-    expect(list, isA<List<Map>>());
-  });
+    test('It must return a list with the data of the motoboys', () async {
+      var list = await motoboyDao.getAll();
+      print(list);
+      expect(list, isA<List<Map>>());
+    });
 
-  test('Must update the email and image of the motoboy', () async {
-    var id = await motoboyDao.update(
-      data: MotoboyModel(
-        mot_name: 'Ricardo',
-        mot_email: 'rcpompeo@gmail.com',
-        mot_image: Uint8List.fromList(
-          [4, 3, 2, 1],
+    test('Must update the email and image of the motoboy', () async {
+      var id = await motoboyDao.update(
+        data: MotoboyModel(
+          mot_name: 'Ricardo',
+          mot_email: 'rcpompeo@gmail.com',
+          mot_image: Uint8List.fromList(
+            [4, 3, 2, 1],
+          ),
         ),
-      ),
-    );
-    print(id);
-    expect(id, isNonZero);
+      );
+      print(id);
+      expect(id, isNonZero);
+    });
+
+    test('You must exclude a motoboy', () async {
+      var id = await motoboyDao.delete(
+        data: MotoboyModel(
+          mot_name: 'rcdo1 dev',
+        ),
+      );
+      print(id);
+      expect(id, isNonZero);
+    });
   });
 
-  test('You must exclude a motoboy', () async {
-    var id = await motoboyDao.delete(
-      data: MotoboyModel(
-        mot_name: 'Ricardo Cardoso',
-      ),
-    );
-    print(id);
-    expect(id, isNonZero);
+  tearDownAll(() {
+    print('Tests completed');
   });
 }
