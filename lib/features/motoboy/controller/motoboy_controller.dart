@@ -12,12 +12,12 @@ class MotoboyController {
     return await _dao.insert(data: motoboy);
   }
 
-  Future<MotoboyModel?> getMotoboyById({required int id}) async {
-    return await _dao.getById(id: id);
-  }
-
   Future<List<Map>?> getAllMotoboys() async {
     return await _dao.getAll();
+  }
+
+  Future<MotoboyModel?> getMotoboyById({required int id}) async {
+    return await _dao.getById(id: id);
   }
 
   Future<int?> updateMotoboy({required MotoboyModel motoboy}) async {
