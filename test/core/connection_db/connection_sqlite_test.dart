@@ -67,9 +67,9 @@ class ConnectionSQlite implements IConnectionDb<Database> {
 
 void main() {
   setUpAll(() {
-    // Initialize FFI
+    // Initialize sqflite_common_ffi
     sqfliteFfiInit();
-    // Change the default factory
+    // Tells sqflite to use the database factory provided by sqflite_common_ffi
     databaseFactory = databaseFactoryFfi;
   });
 
@@ -78,5 +78,9 @@ void main() {
   test('Must return a database connection.', () async {
     var database = await connection.connectionDatabase();
     expect(database, isA<Database>());
+  });
+
+  tearDownAll(() {
+    print('Tests completed');
   });
 }

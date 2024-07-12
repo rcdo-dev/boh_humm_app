@@ -42,15 +42,15 @@ void main() {
   Modular.bindModule(AppModule());
 
   setUpAll(() {
-    // Initialize FFI
+    // Initialize sqflite_common_ffi
     sqfliteFfiInit();
-    // Change the default factory
+    // Tells sqflite to use the database factory provided by sqflite_common_ffi
     databaseFactory = databaseFactoryFfi;
   });
 
   MotoboyModel motoboy = MotoboyModel(
-    mot_name: 'moto4',
-    mot_email: 'moto4.moto@email.com',
+    mot_name: 'moto5',
+    mot_email: 'moto5.moto@email.com',
     mot_image: Uint8List.fromList([4, 5, 6, 7]),
   );
 
@@ -58,35 +58,40 @@ void main() {
   MotoboyController controller = MotoboyController(motoboyDao);
   final int idMotoboy = 3;
 
-  test('Must save a motoboy through the controller class', () async {
-    var lastId = await controller.saveMotoboy(motoboy: motoboy);
-    expect(lastId, isNotNull);
+  group('CRUD motoboy by Controller class', () {
+    test('Must save a motoboy through the controller class', () async {
+      var lastId = await controller.saveMotoboy(motoboy: motoboy);
+      expect(lastId, isNotNull);
+    });
+
+    test('Must return a motoboy per id through the controller class', () async {
+      var motoboyModel = await controller.getMotoboyById(id: idMotoboy);
+      print(motoboyModel?.mot_name);
+      expect(motoboyModel, isA<MotoboyModel>());
+    });
+
+    test('It must return a list of all motoboys through the controller class',
+        () async {
+      var list = await controller.getAllMotoboys();
+      print(list?.first);
+      expect(list, isNotEmpty);
+    });
+
+    test('Must update a motoboy through the controller class', () async {
+      var id = await controller.updateMotoboy(motoboy: motoboy);
+      print(id);
+      expect(id, isNotNull);
+    });
+
+    test('Must exclude a motoboy through the controller class', () async {
+      var id = await controller.deleteMotoboy(motoboy: motoboy);
+      print(id);
+      expect(id, isNotNull);
+    });
   });
 
-  test('Must return a motoboy per id through the controller class', () async {
-    var motoboyModel = await controller.getMotoboyById(id: idMotoboy);
-    print(motoboyModel?.mot_name);
-    expect(motoboyModel, isA<MotoboyModel>());
-  });
-
-  test('It must return a list of all motoboys through the controller class',
-      () async {
-    var list = await controller.getAllMotoboys();
-    print(list?.first);
-    expect(list, isNotEmpty);
-  });
-
-  test('Must update a motoboy through the controller class',
-      () async {
-    var id = await controller.updateMotoboy(motoboy: motoboy);
-    print(id);
-    expect(id, isNotNull);
-  });
-
-  test('Must exclude a motoboy through the controller class',
-      () async {
-    var id = await controller.deleteMotoboy(motoboy: motoboy);
-    print(id);
-    expect(id, isNotNull);
+  // Finalizes the life cycle of the test suite.
+  tearDownAll(() {
+    print('Tests completed');
   });
 }

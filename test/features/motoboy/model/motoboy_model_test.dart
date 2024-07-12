@@ -48,11 +48,13 @@ void main() {
 
   var motoboyData = MotoboyModel.fromMap(map);
 
-  test('Must convert a MotoboyModel object into a map.', () {
-    expect(map, isA<Map<String, Object?>>());
-  });
+  group('MotoboyModel object conversion', () {
+    test('Must convert a MotoboyModel object into a map.', () {
+      expect(map, isA<Map<String, Object?>>());
+    });
 
-  test('Must convert a map into a MotoboyModel object.', () {
-    expect(motoboyData, isA<MotoboyModel>());
+    test('Must convert a map into a MotoboyModel object.', () {
+      expect(motoboyData, isA<MotoboyModel>());
+    });
   });
 }
