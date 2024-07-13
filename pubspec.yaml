@@ -30,3 +30,6 @@ dev_dependencies:
   # Allow the use of SQLite through the FFI interface in environments where SQLite is not natively available or 
   # where access to native APIs is required. Allows mocking sqflite during flutter regular unit testing.
   sqflite_common_ffi: ^2.3.3
+  
+  # Used to mock classes
+  mocktail: ^1.0.4
