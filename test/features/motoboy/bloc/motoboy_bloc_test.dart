@@ -1,8 +1,13 @@
-import 'dart:async';
+import 'dart:typed_data';
 
-import 'package:boh_humm/core/data_access/dao/i_dao.dart';
+import 'package:bloc/bloc.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:mocktail/mocktail.dart';
+
+import 'package:boh_humm/core/data_access/dao/i_dao.dart';
+import 'package:boh_humm/core/data_access/dao/impl/motoboy_dao.dart';
 import 'package:boh_humm/features/motoboy/model/motoboy_model.dart';
 
 // -------------------------------------------------------
@@ -52,10 +57,10 @@ class InitialMotoboy extends MotoboyState {}
 class LoadingMotoboy extends MotoboyState {}
 
 class LoadedMotoboy extends MotoboyState {
-  final List<Map> motoboys;
+  final List<Map>? motoboys;
 
   LoadedMotoboy({
-    required this.motoboys,
+    this.motoboys,
   });
 }
 
@@ -69,32 +74,61 @@ class ErrorMotoboy extends MotoboyState {
 
 // -------------------------------------------------------
 
-class MotoboyBloc {
+class MotoboyBloc extends Bloc<MotoboyEvent, MotoboyState> {
   final IDao dao;
-
-  final _stateController = StreamController<MotoboyState>();
-  final _eventController = StreamController<MotoboyEvent>();
-
-  Stream<MotoboyState> get state => _stateController.stream;
-  Sink<MotoboyEvent> get event => _eventController.sink;
 
   MotoboyBloc({
     required this.dao,
-  }) {
-    _eventController.stream.listen(_mapEventoToState);
+  }) : super(InitialMotoboy()) {
+    on<MotoboyEvent>((event, emit) async {
+      var listMotoboy = await dao.getAll() ?? [];
+      emit(LoadedMotoboy(motoboys: listMotoboy));
+    });
   }
 
-  void _mapEventoToState(MotoboyEvent event) async {
-    if (event is RegisterMotoboy) {
-      await dao.insert(data: event.motoboy);
-      var listMotoboy = await dao.getAll() ?? [];
-      _stateController.add(LoadedMotoboy(motoboys: listMotoboy));
-    }
+  @override
+  void onChange(Change<MotoboyState> change) {
+    super.onChange(change);
+    print('Estado: $change');
+  }
+
+  @override
+  void onEvent(MotoboyEvent event) {
+    super.onEvent(event);
+    print('Evento: $event');
   }
 }
 
 // -------------------------------------------------------
 
+class MotoboyDaoMock extends Mock implements MotoboyDao {}
+
+// -------------------------------------------------------
+
 void main() {
-  test('description', () {});
+  final MotoboyDaoMock daoMock = MotoboyDaoMock();
+  final MotoboyModel motoboy = MotoboyModel(
+    mot_id: 1,
+    mot_name: 'Ricardo c1',
+    mot_email: 'rcdo.c1',
+    mot_image: Uint8List.fromList([0, 1, 2, 3, 4]),
+  );
+
+  final List<Map> result = [
+    motoboy.toMap(),
+  ];
+
+  when(() => daoMock.insert()).thenAnswer((_) async => 1);
+  when(() => daoMock.getAll()).thenAnswer((_) async => result);
+
+  blocTest<MotoboyBloc, MotoboyState>(
+    'emits 1 when RegisterMotoboy is added',
+    build: () => MotoboyBloc(dao: daoMock),
+    act: (bloc) => bloc.add(RegisterMotoboy(motoboy: motoboy)),
+    expect: () => [isA<LoadedMotoboy>()],
+  );
+
+  tearDown(() {
+    print('Test finalized');
+  });
 }

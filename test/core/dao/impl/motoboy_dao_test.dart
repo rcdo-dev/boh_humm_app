@@ -18,13 +18,13 @@ class MotoboyDao implements IDao<MotoboyModel> {
   });
 
   @override
-  Future<int?> insert({required MotoboyModel data}) async {
+  Future<int?> insert({MotoboyModel? data}) async {
     Database database = await connection.connectionDatabase();
 
     try {
       int lastId = await database.rawInsert(
         "INSERT INTO motoboy(mot_name, mot_email, mot_image) VALUES (?, ?, ?)",
-        [data.mot_name, data.mot_email, data.mot_image],
+        [data?.mot_name, data?.mot_email, data?.mot_image],
       );
       database.close();
       return lastId;

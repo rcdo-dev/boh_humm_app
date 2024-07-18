@@ -10,8 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # Navigation and dependency injection.
-  flutter_modular: ^6.3.4
 
   # Cross-platform path manipulation library for Dart.
   path: ^1.9.0
@@ -21,6 +19,16 @@ dependencies:
 
   # Sends latest version of sqlite along with the app.
   sqlite3_flutter_libs: ^0.5.24
+  
+  # Navigation and dependency injection.
+  flutter_modular: ^6.3.4
+  
+  # A dart package that helps implement the BLoC pattern.
+  bloc: ^8.1.4
+
+  # A Dart package that makes testing blocs and cubits easy.
+  # Built to work with bloc and mocktail.
+  bloc_test: ^9.1.7
 
 dev_dependencies:
   lints: ^3.0.0
