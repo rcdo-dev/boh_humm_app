@@ -80,7 +80,8 @@ class MotoboyBloc extends Bloc<MotoboyEvent, MotoboyState> {
   MotoboyBloc({
     required this.dao,
   }) : super(InitialMotoboy()) {
-    on<MotoboyEvent>((event, emit) async {
+    on<RegisterMotoboy>((event, emit) async {
+      await dao.insert(data: event.motoboy);
       var listMotoboy = await dao.getAll() ?? [];
       emit(LoadedMotoboy(motoboys: listMotoboy));
     });
@@ -89,13 +90,13 @@ class MotoboyBloc extends Bloc<MotoboyEvent, MotoboyState> {
   @override
   void onChange(Change<MotoboyState> change) {
     super.onChange(change);
-    print('Estado: $change');
+    print('State: $change');
   }
 
   @override
   void onEvent(MotoboyEvent event) {
     super.onEvent(event);
-    print('Evento: $event');
+    print('Event: $event');
   }
 }
 
@@ -106,29 +107,40 @@ class MotoboyDaoMock extends Mock implements MotoboyDao {}
 // -------------------------------------------------------
 
 void main() {
-  final MotoboyDaoMock daoMock = MotoboyDaoMock();
-  final MotoboyModel motoboy = MotoboyModel(
-    mot_id: 1,
-    mot_name: 'Ricardo c1',
-    mot_email: 'rcdo.c1',
-    mot_image: Uint8List.fromList([0, 1, 2, 3, 4]),
-  );
+  group('MotoboyBloc', () {
+    late final MotoboyDaoMock daoMock;
+    late final MotoboyModel motoboy;
+    late final List<Map> result;
 
-  final List<Map> result = [
-    motoboy.toMap(),
-  ];
+    setUp(() {
+      daoMock = MotoboyDaoMock();
+      motoboy = MotoboyModel(
+        mot_id: 1,
+        mot_name: 'Ricardo c1',
+        mot_email: 'rcdo.c1',
+        mot_image: Uint8List.fromList([0, 1, 2, 3, 4]),
+      );
+      result = [
+        motoboy.toMap(),
+      ];
+      when(() => daoMock.insert(data: motoboy)).thenAnswer((_) async => 1);
+      when(() => daoMock.getAll()).thenAnswer((_) async => result);
+    });
 
-  when(() => daoMock.insert()).thenAnswer((_) async => 1);
-  when(() => daoMock.getAll()).thenAnswer((_) async => result);
-
-  blocTest<MotoboyBloc, MotoboyState>(
-    'emits 1 when RegisterMotoboy is added',
-    build: () => MotoboyBloc(dao: daoMock),
-    act: (bloc) => bloc.add(RegisterMotoboy(motoboy: motoboy)),
-    expect: () => [isA<LoadedMotoboy>()],
-  );
-
-  tearDown(() {
-    print('Test finalized');
+    blocTest<MotoboyBloc, MotoboyState>(
+      'emits LoadedMotoboy state when RegisterMotoboy is added',
+      build: () => MotoboyBloc(dao: daoMock),
+      act: (bloc) => bloc.add(RegisterMotoboy(motoboy: motoboy)),
+      expect: () => [
+        isA<LoadedMotoboy>().having(
+          (state) => state.motoboys,
+          'The motoboys list cannot be empty',
+          isNotEmpty,
+        )
+      ],
+    );
+    tearDown(() {
+      print('Test finalized');
+    });
   });
 }
