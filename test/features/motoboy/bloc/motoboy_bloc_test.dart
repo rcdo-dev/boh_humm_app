@@ -81,7 +81,14 @@ class MotoboyBloc extends Bloc<MotoboyEvent, MotoboyState> {
     required this.dao,
   }) : super(InitialMotoboy()) {
     on<RegisterMotoboy>((event, emit) async {
+      emit(LoadingMotoboy());
       await dao.insert(data: event.motoboy);
+      var listMotoboy = await dao.getAll() ?? [];
+      emit(LoadedMotoboy(motoboys: listMotoboy));
+    });
+
+    on<GetAllMotoboys>((event, emit) async {
+      emit(LoadingMotoboy());
       var listMotoboy = await dao.getAll() ?? [];
       emit(LoadedMotoboy(motoboys: listMotoboy));
     });
@@ -112,7 +119,7 @@ void main() {
     late final MotoboyModel motoboy;
     late final List<Map> result;
 
-    setUp(() {
+    setUpAll(() {
       daoMock = MotoboyDaoMock();
       motoboy = MotoboyModel(
         mot_id: 1,
@@ -132,6 +139,7 @@ void main() {
       build: () => MotoboyBloc(dao: daoMock),
       act: (bloc) => bloc.add(RegisterMotoboy(motoboy: motoboy)),
       expect: () => [
+        isA<LoadingMotoboy>(),
         isA<LoadedMotoboy>().having(
           (state) => state.motoboys,
           'The motoboys list cannot be empty',
@@ -139,8 +147,22 @@ void main() {
         )
       ],
     );
-    tearDown(() {
-      print('Test finalized');
+
+    blocTest<MotoboyBloc, MotoboyState>(
+      'emits LoadedMotoboy state when GetAllMotoboys is added',
+      build: () => MotoboyBloc(dao: daoMock),
+      act: (bloc) => bloc.add(GetAllMotoboys()),
+      expect: () => [
+        isA<LoadingMotoboy>(),
+        isA<LoadedMotoboy>().having(
+          (state) => state.motoboys,
+          'The motoboys list cannot be empty',
+          isNotEmpty,
+        ),
+      ],
+    );
+    tearDownAll(() {
+      print('Tests finalized');
     });
   });
 }
