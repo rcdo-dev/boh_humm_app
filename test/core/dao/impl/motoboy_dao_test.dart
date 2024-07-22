@@ -37,7 +37,7 @@ class MotoboyDao implements IDao<MotoboyModel> {
   }
 
   @override
-  Future<MotoboyModel?> getById({required int id}) async {
+  Future<MotoboyModel?> getById({int? id}) async {
     Database database = await connection.connectionDatabase();
 
     try {

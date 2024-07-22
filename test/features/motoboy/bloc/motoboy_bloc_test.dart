@@ -25,10 +25,10 @@ class RegisterMotoboy extends MotoboyEvent {
 class GetAllMotoboys extends MotoboyEvent {}
 
 class GetMotoboyById extends MotoboyEvent {
-  final int id;
+  int? id;
 
   GetMotoboyById({
-    required this.id,
+    this.id,
   });
 }
 
@@ -64,6 +64,14 @@ class LoadedMotoboy extends MotoboyState {
   });
 }
 
+class LoadedMotoboyById extends MotoboyState {
+  final MotoboyModel? motoboy;
+
+  LoadedMotoboyById({
+    this.motoboy,
+  });
+}
+
 class ErrorMotoboy extends MotoboyState {
   final String errorMessage;
 
@@ -91,6 +99,12 @@ class MotoboyBloc extends Bloc<MotoboyEvent, MotoboyState> {
       emit(LoadingMotoboy());
       var listMotoboy = await dao.getAll() ?? [];
       emit(LoadedMotoboy(motoboys: listMotoboy));
+    });
+
+    on<GetMotoboyById>((event, emit) async {
+      emit(LoadingMotoboy());
+      var motoboy = await dao.getById(id: event.id);
+      emit(LoadedMotoboyById(motoboy: motoboy));
     });
   }
 
@@ -132,6 +146,9 @@ void main() {
       ];
       when(() => daoMock.insert(data: motoboy)).thenAnswer((_) async => 1);
       when(() => daoMock.getAll()).thenAnswer((_) async => result);
+      when(() => daoMock.getById(id: motoboy.mot_id)).thenAnswer(
+        (_) async => motoboy,
+      );
     });
 
     blocTest<MotoboyBloc, MotoboyState>(
@@ -159,6 +176,20 @@ void main() {
           'The motoboys list cannot be empty',
           isNotEmpty,
         ),
+      ],
+    );
+
+    blocTest<MotoboyBloc, MotoboyState>(
+      'emits LoadedMotoboyById state when GetMotoboyById is added',
+      build: () => MotoboyBloc(dao: daoMock),
+      act: (bloc) => bloc.add(GetMotoboyById(id: motoboy.mot_id)),
+      expect: () => [
+        isA<LoadingMotoboy>(),
+        isA<LoadedMotoboyById>().having(
+          (state) => state.motoboy,
+          "The motoboy object can't be null",
+          isNotNull,
+        )
       ],
     );
     tearDownAll(() {
