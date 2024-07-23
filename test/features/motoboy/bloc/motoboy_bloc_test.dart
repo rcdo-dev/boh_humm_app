@@ -106,6 +106,19 @@ class MotoboyBloc extends Bloc<MotoboyEvent, MotoboyState> {
       var motoboy = await dao.getById(id: event.id);
       emit(LoadedMotoboyById(motoboy: motoboy));
     });
+
+    on<UpdateMotoboy>((event, emit) async {
+      emit(LoadingMotoboy());
+      await dao.update(data: event.motoboy);
+      var motoboy = await dao.getById(id: event.motoboy.mot_id);
+      emit(LoadedMotoboyById(motoboy: motoboy));
+    });
+
+    on<DeleteMotoboy>((event, emit) async {
+      emit(LoadingMotoboy());
+      await dao.delete(data: event.motoboy);
+      emit(InitialMotoboy());
+    });
   }
 
   @override
@@ -149,6 +162,8 @@ void main() {
       when(() => daoMock.getById(id: motoboy.mot_id)).thenAnswer(
         (_) async => motoboy,
       );
+      when(() => daoMock.update(data: motoboy)).thenAnswer((_) async => 1);
+      when(() => daoMock.delete(data: motoboy)).thenAnswer((_) async => 1);
     });
 
     blocTest<MotoboyBloc, MotoboyState>(
@@ -190,6 +205,30 @@ void main() {
           "The motoboy object can't be null",
           isNotNull,
         )
+      ],
+    );
+
+    blocTest<MotoboyBloc, MotoboyState>(
+      'emits LoadedMotoboyById state when UpdateMotoboy is added',
+      build: () => MotoboyBloc(dao: daoMock),
+      act: (bloc) => bloc.add(UpdateMotoboy(motoboy: motoboy)),
+      expect: () => [
+        isA<LoadingMotoboy>(),
+        isA<LoadedMotoboyById>().having(
+          (state) => state.motoboy,
+          "The motoboy object can't be null",
+          isNotNull,
+        )
+      ],
+    );
+
+    blocTest<MotoboyBloc, MotoboyState>(
+      'emits InitialMotoboy state when DeleteMotoboy is added',
+      build: () => MotoboyBloc(dao: daoMock),
+      act: (bloc) => bloc.add(DeleteMotoboy(motoboy: motoboy)),
+      expect: () => [
+        isA<LoadingMotoboy>(),
+        isA<InitialMotoboy>(),
       ],
     );
     tearDownAll(() {

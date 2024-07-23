@@ -76,7 +76,6 @@ class MotoboyDao implements IDao<MotoboyModel> {
   @override
   Future<int?> update({required MotoboyModel data}) async {
     Database database = await connection.connectionDatabase();
-
     try {
       int id = await database.rawUpdate(
         "UPDATE motoboy SET mot_email = ?, mot_image = ? WHERE mot_name = ?",
