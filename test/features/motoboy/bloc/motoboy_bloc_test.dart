@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:boh_humm/core/data_access/dao/i_dao.dart';
-import 'package:boh_humm/core/data_access/dao/impl/motoboy_dao.dart';
+import 'package:boh_humm/features/motoboy/dao/motoboy_dao.dart';
 import 'package:boh_humm/features/motoboy/model/motoboy_model.dart';
 
 // -------------------------------------------------------

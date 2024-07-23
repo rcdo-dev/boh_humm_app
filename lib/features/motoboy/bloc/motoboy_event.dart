@@ -13,10 +13,10 @@ class RegisterMotoboy extends MotoboyEvent {
 class GetAllMotoboys extends MotoboyEvent {}
 
 class GetMotoboyById extends MotoboyEvent {
-  final int id;
+  int? id;
 
   GetMotoboyById({
-    required this.id,
+    this.id,
   });
 }
 

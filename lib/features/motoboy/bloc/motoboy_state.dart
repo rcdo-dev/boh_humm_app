@@ -7,10 +7,18 @@ class InitialMotoboy extends MotoboyState {}
 class LoadingMotoboy extends MotoboyState {}
 
 class LoadedMotoboy extends MotoboyState {
-  final List<MotoboyModel> motoboys;
+  final List<Map>? motoboys;
 
   LoadedMotoboy({
-    required this.motoboys,
+    this.motoboys,
+  });
+}
+
+class LoadedMotoboyById extends MotoboyState {
+  final MotoboyModel? motoboy;
+
+  LoadedMotoboyById({
+    this.motoboy,
   });
 }
 
