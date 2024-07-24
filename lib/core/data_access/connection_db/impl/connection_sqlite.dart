@@ -8,7 +8,6 @@ class ConnectionSQlite implements IConnectionDb<Database> {
   Future<Database> connectionDatabase() async {
     var documentDirectoryPath = await getDatabasesPath();
     var path = join(documentDirectoryPath, 'app_motoboy.db');
-    print(path);
 
     return await openDatabase(
       path,

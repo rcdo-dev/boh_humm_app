@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class AppTextFormField extends StatelessWidget {
   final String? labelText;
+  final TextEditingController? controller;
 
   const AppTextFormField({
     super.key,
     this.labelText,
+    this.controller,
   });
 
   @override
@@ -14,6 +16,7 @@ class AppTextFormField extends StatelessWidget {
       height: 50,
       width: 330,
       child: TextFormField(
+        controller: controller,
         cursorColor: Colors.black,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left: 20),
