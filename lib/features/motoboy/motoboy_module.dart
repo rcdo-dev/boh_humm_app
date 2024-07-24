@@ -7,6 +7,6 @@ class MotoboyModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child('/motoboy', child: (context) => MotoboyPage());
+    r.child('/', child: (context) => MotoboyPage());
   }
 }

@@ -42,7 +42,7 @@
                     }
                 },
                 {
-                    "source": "/home/rcdo/rcdo_workspace/projects/boh_humm/android/app/src/main/res/values/styles.xml",
+                    "source": "/home/rcdo/rcdo_workspace/projects/boh_humm_app/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
