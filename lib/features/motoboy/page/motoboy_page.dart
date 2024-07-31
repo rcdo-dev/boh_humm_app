@@ -1,13 +1,13 @@
-import 'package:boh_humm/features/motoboy/bloc/picture/picture_bloc.dart';
-import 'package:boh_humm/features/motoboy/bloc/picture/picture_event.dart';
-import 'package:boh_humm/features/motoboy/bloc/picture/picture_state.dart';
+import 'package:boh_humm/features/motoboy/blocs/picture/picture_bloc.dart';
+import 'package:boh_humm/features/motoboy/blocs/picture/picture_event.dart';
+import 'package:boh_humm/features/motoboy/blocs/picture/picture_state.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:boh_humm/features/motoboy/bloc/motoboy_bloc.dart';
-import 'package:boh_humm/features/motoboy/bloc/motoboy_state.dart';
+import 'package:boh_humm/features/motoboy/blocs/motoboy/motoboy_bloc.dart';
+import 'package:boh_humm/features/motoboy/blocs/motoboy/motoboy_state.dart';
 import 'package:boh_humm/features/motoboy/controller/motoboy_controller.dart';
 import 'package:boh_humm/shared/widgets/app_button.dart';
 import 'package:boh_humm/shared/widgets/app_text_form_field.dart';

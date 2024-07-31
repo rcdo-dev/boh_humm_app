@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:boh_humm/features/motoboy/bloc/picture/picture_event.dart';
-import 'package:boh_humm/features/motoboy/bloc/picture/picture_state.dart';
+import 'package:boh_humm/features/motoboy/blocs/picture/picture_event.dart';
+import 'package:boh_humm/features/motoboy/blocs/picture/picture_state.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PictureBloc extends Bloc<PictureEvent, PictureState> {

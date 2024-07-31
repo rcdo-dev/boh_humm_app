@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:boh_humm/core/data_access/dao/i_dao.dart';
-import 'package:boh_humm/features/motoboy/bloc/motoboy_event.dart';
-import 'package:boh_humm/features/motoboy/bloc/motoboy_state.dart';
+import 'package:boh_humm/features/motoboy/blocs/motoboy/motoboy_event.dart';
+import 'package:boh_humm/features/motoboy/blocs/motoboy/motoboy_state.dart';
 
 class MotoboyBloc extends Bloc<MotoboyEvent, MotoboyState> {
   final IDao dao;

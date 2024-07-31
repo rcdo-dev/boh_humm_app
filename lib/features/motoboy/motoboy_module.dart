@@ -1,8 +1,8 @@
 import 'package:boh_humm/core/data_access/connection_db/i_connection_db.dart';
 import 'package:boh_humm/core/data_access/connection_db/impl/connection_sqlite.dart';
 import 'package:boh_humm/core/data_access/dao/i_dao.dart';
-import 'package:boh_humm/features/motoboy/bloc/motoboy_bloc.dart';
-import 'package:boh_humm/features/motoboy/bloc/picture/picture_bloc.dart';
+import 'package:boh_humm/features/motoboy/blocs/motoboy/motoboy_bloc.dart';
+import 'package:boh_humm/features/motoboy/blocs/picture/picture_bloc.dart';
 import 'package:boh_humm/features/motoboy/controller/motoboy_controller.dart';
 import 'package:boh_humm/features/motoboy/dao/motoboy_dao.dart';
 import 'package:flutter_modular/flutter_modular.dart';
