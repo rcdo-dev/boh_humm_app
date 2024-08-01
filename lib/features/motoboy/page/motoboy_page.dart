@@ -1,6 +1,7 @@
 import 'package:boh_humm/features/motoboy/widgets/picture/error_picture.dart';
 import 'package:boh_humm/features/motoboy/widgets/picture/initial_picture.dart';
 import 'package:boh_humm/features/motoboy/widgets/picture/loaded_picture.dart';
+import 'package:boh_humm/shared/widgets/app_circle_avatar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,17 +33,6 @@ class MotoboyPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Cadastre-se'),
-        actions: [
-          AppButton(
-            onPressed: () {
-              blocPicture.add(GetPictureCameraEvent());
-            },
-            child: Icon(
-              Icons.camera_alt_outlined,
-            ),
-            width: 80,
-          ),
-        ],
       ),
       body: BlocBuilder<MotoboyBloc, MotoboyState>(
         bloc: bloc,
@@ -55,24 +45,59 @@ class MotoboyPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    BlocBuilder<PictureBloc, PictureState>(
-                      bloc: blocPicture,
-                      builder: (context, state) {
-                        if (state is InitialPictureState) {
-                          return InitialPicture();
-                        } else if (state is LoadedPictureState) {
-                          return LoadedPicture(
-                            state: state,
-                          );
-                        } else if (state is ErrorPictureState) {
-                          return ErrorPicture(
-                            state: state,
-                          );
-                        }
-                        return Center(
-                          child: Text('Deu ruim'),
-                        );
-                      },
+                    Column(
+                      children: <Widget>[
+                        BlocBuilder<PictureBloc, PictureState>(
+                          bloc: blocPicture,
+                          builder: (context, state) {
+                            if (state is InitialPictureState) {
+                              return InitialPicture();
+                            } else if (state is LoadedPictureState) {
+                              return LoadedPicture(
+                                state: state,
+                              );
+                            } else if (state is ErrorPictureState) {
+                              return ErrorPicture(
+                                state: state,
+                              );
+                            }
+                            return AppCircleAvatar(
+                              child: Center(
+                                child: Text('Error loading photo.'),
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                blocPicture.add(GetPictureCameraEvent());
+                              },
+                              label: Text('Câmera'),
+                              icon: Icon(
+                                Icons.camera_alt_outlined,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                blocPicture.add(GetPictureGalleryEvent());
+                              },
+                              label: Text('Galeria'),
+                              icon: Icon(
+                                Icons.image_search_outlined,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     Column(
                       children: <Widget>[
