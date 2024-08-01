@@ -1,6 +1,6 @@
-import 'package:boh_humm/features/motoboy/blocs/picture/picture_bloc.dart';
-import 'package:boh_humm/features/motoboy/blocs/picture/picture_event.dart';
-import 'package:boh_humm/features/motoboy/blocs/picture/picture_state.dart';
+import 'package:boh_humm/features/motoboy/widgets/picture/error_picture.dart';
+import 'package:boh_humm/features/motoboy/widgets/picture/initial_picture.dart';
+import 'package:boh_humm/features/motoboy/widgets/picture/loaded_picture.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +8,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:boh_humm/features/motoboy/blocs/motoboy/motoboy_bloc.dart';
 import 'package:boh_humm/features/motoboy/blocs/motoboy/motoboy_state.dart';
+import 'package:boh_humm/features/motoboy/blocs/picture/picture_bloc.dart';
+import 'package:boh_humm/features/motoboy/blocs/picture/picture_event.dart';
+import 'package:boh_humm/features/motoboy/blocs/picture/picture_state.dart';
 import 'package:boh_humm/features/motoboy/controller/motoboy_controller.dart';
 import 'package:boh_humm/shared/widgets/app_button.dart';
 import 'package:boh_humm/shared/widgets/app_text_form_field.dart';
@@ -25,13 +28,14 @@ class MotoboyPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final bloc = Modular.get<MotoboyBloc>();
     final blocPicture = Modular.get<PictureBloc>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Cadastre-se'),
         actions: [
           AppButton(
             onPressed: () {
-              blocPicture.add(GetPictureCamera());
+              blocPicture.add(GetPictureCameraEvent());
             },
             child: Icon(
               Icons.camera_alt_outlined,
@@ -52,31 +56,24 @@ class MotoboyPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     BlocBuilder<PictureBloc, PictureState>(
-                        bloc: blocPicture,
-                        builder: (context, state) {
-                          if (state is InitialPicture) {
-                            return SizedBox(
-                              height: size.height / 4.5,
-                              child: CircleAvatar(
-                                child: Icon(
-                                  Icons.person,
-                                  size: 100,
-                                ),
-                                maxRadius: 100,
-                              ),
-                            );
-                          } else if (state is LoadedPicture) {
-                            return SizedBox(
-                                height: size.height / 4.5,
-                                child: Image.file(state.picture!));
-                          } else if (state is ErrorPicture) {
-                            return Center(
-                                child: Text(state.erroMessage.toString()));
-                          }
-                          return Center(
-                            child: Text('Deu ruim'),
+                      bloc: blocPicture,
+                      builder: (context, state) {
+                        if (state is InitialPictureState) {
+                          return InitialPicture();
+                        } else if (state is LoadedPictureState) {
+                          return LoadedPicture(
+                            state: state,
                           );
-                        }),
+                        } else if (state is ErrorPictureState) {
+                          return ErrorPicture(
+                            state: state,
+                          );
+                        }
+                        return Center(
+                          child: Text('Deu ruim'),
+                        );
+                      },
+                    ),
                     Column(
                       children: <Widget>[
                         AppTextFormField(

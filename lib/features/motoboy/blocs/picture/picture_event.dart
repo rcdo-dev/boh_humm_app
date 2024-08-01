@@ -1,5 +1,5 @@
 abstract class PictureEvent {}
 
-class GetPictureGallery extends PictureEvent {}
+class GetPictureGalleryEvent extends PictureEvent {}
 
-class GetPictureCamera extends PictureEvent {}
+class GetPictureCameraEvent extends PictureEvent {}

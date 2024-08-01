@@ -2,20 +2,20 @@ import 'dart:io';
 
 abstract class PictureState {}
 
-class InitialPicture extends PictureState {}
+class InitialPictureState extends PictureState {}
 
-class LoadedPicture extends PictureState {
+class LoadedPictureState extends PictureState {
   final File? picture;
 
-  LoadedPicture({
+  LoadedPictureState({
     this.picture,
   });
 }
 
-class ErrorPicture extends PictureState {
+class ErrorPictureState extends PictureState {
   final String? erroMessage;
 
-  ErrorPicture({
+  ErrorPictureState({
     this.erroMessage,
   });
 }

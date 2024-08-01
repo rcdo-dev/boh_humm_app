@@ -6,37 +6,37 @@ import 'package:boh_humm/features/motoboy/blocs/picture/picture_state.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PictureBloc extends Bloc<PictureEvent, PictureState> {
-  PictureBloc() : super(InitialPicture()) {
-    on<GetPictureGallery>((event, emit) async {
+  PictureBloc() : super(InitialPictureState()) {
+    on<GetPictureGalleryEvent>((event, emit) async {
       try {
         final pickedFile = await ImagePicker().pickImage(
           source: ImageSource.gallery,
         );
         if (pickedFile != null) {
-          emit(LoadedPicture(picture: File(pickedFile.path)));
+          emit(LoadedPictureState(picture: File(pickedFile.path)));
         } else {
-          emit(ErrorPicture(erroMessage: 'Nenhuma foto selecionada.'));
+          emit(ErrorPictureState(erroMessage: 'No photos selected.'));
         }
       } catch (e, s) {
-        emit(ErrorPicture(
-          erroMessage: 'Erro ao selecionar foto: $e | StackTrace: $s',
+        emit(ErrorPictureState(
+          erroMessage: 'Error selecting photo: $e | StackTrace: $s',
         ));
       }
     });
 
-    on<GetPictureCamera>((event, emit) async {
+    on<GetPictureCameraEvent>((event, emit) async {
       try {
         final pickedFile = await ImagePicker().pickImage(
           source: ImageSource.camera,
         );
         if (pickedFile != null) {
-          emit(LoadedPicture(picture: File(pickedFile.path)));
+          emit(LoadedPictureState(picture: File(pickedFile.path)));
         } else {
-          emit(ErrorPicture(erroMessage: 'Nenhuma foto selecionada.'));
+          emit(ErrorPictureState(erroMessage: 'No photos selected.'));
         }
       } catch (e, s) {
-        emit(ErrorPicture(
-          erroMessage: 'Erro ao selecionar foto: $e | StackTrace: $s',
+        emit(ErrorPictureState(
+          erroMessage: 'Error selecting photo: $e | StackTrace: $s',
         ));
       }
     });
