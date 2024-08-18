@@ -10,4 +10,20 @@ class DeliveryModel {
     this.del_order,
     this.del_fee,
   });
+
+  Map<String, Object?> toMap() {
+    var map = <String, Object?>{};
+    map['del_id'] = del_id;
+    map['del_order'] = del_order;
+    map['del_fee'] = del_fee;
+    return map;
+  }
+
+  factory DeliveryModel.fromMap(Map<String, Object?> map) {
+    return DeliveryModel(
+      del_id: int.tryParse(map['del_id'].toString()),
+      del_order: int.tryParse(map['del_order'].toString()),
+      del_fee: num.tryParse(map['del_fee'].toString()),
+    );
+  }
 }

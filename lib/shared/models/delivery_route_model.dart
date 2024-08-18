@@ -12,4 +12,22 @@ class DeliveryRouteModel {
     this.delr_del_id,
     this.delr_slo_id,
   });
+
+  Map<String, Object?> toMap() {
+    var map = <String, Object?>{};
+    map['delr_id'] = delr_id;
+    map['delr_identifier'] = delr_identifier;
+    map['delr_del_id'] = delr_del_id;
+    map['delr_slo_id'] = delr_slo_id;
+    return map;
+  }
+
+  factory DeliveryRouteModel.fromMap(Map<String, Object?> map) {
+    return DeliveryRouteModel(
+      delr_id: int.tryParse(map['delr_id'].toString()),
+      delr_identifier: int.tryParse(map['delr_identifier'].toString()),
+      delr_del_id: int.tryParse(map['delr_del_id'].toString()),
+      delr_slo_id: int.tryParse(map['delr_slo_id'].toString()),
+    );
+  }
 }
