@@ -1,16 +1,15 @@
-import 'package:boh_humm/shared/models/delivery_route_model.dart';
+// ignore_for_file: non_constant_identifier_names
 
 class SlopeModel {
-  final DateTime? date;
-  final num? value;
-  List<DeliveryRouteModel> deliveryRoutes;
+  final int? slo_id;
+  final String? slo_date;
+  final num? slo_value;
+  final int? slo_mot_id;
 
   SlopeModel({
-    this.date,
-    this.value,
-  }) : deliveryRoutes = [];
-
-  void addDeliveryRoute({required DeliveryRouteModel deliveryRoute}) {
-    deliveryRoutes.add(deliveryRoute);
-  }
+    this.slo_id,
+    this.slo_date,
+    this.slo_value,
+    this.slo_mot_id,
+  });
 }

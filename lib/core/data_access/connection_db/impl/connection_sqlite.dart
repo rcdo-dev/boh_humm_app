@@ -30,7 +30,7 @@ class ConnectionSQlite implements IConnectionDb<Database> {
           '''
           CREATE TABLE slope (
           slo_id INTEGER PRIMARY KEY AUTOINCREMENT,
-          slo_date DATE NOT NULL,
+          slo_date TEXT NOT NULL,
           slo_value REAL,
           slo_mot_id INTEGER UNIQUE NOT NULL,
           FOREIGN KEY (slo_mot_id) REFERENCES slope (mot_id)
