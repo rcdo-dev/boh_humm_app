@@ -1,4 +1,4 @@
-import 'package:boh_humm/features/model/delivery_model.dart';
+import 'package:boh_humm/shared/models/delivery_model.dart';
 
 class DeliveryRouteModel {
   final int? identifier;

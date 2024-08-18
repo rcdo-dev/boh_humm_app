@@ -1,4 +1,4 @@
-import 'package:boh_humm/features/model/delivery_route_model.dart';
+import 'package:boh_humm/shared/models/delivery_route_model.dart';
 
 class SlopeModel {
   final DateTime? date;
