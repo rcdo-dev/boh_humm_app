@@ -13,6 +13,8 @@ class SlopeModel {
     this.slo_mot_id,
   });
 
+  // Criar um módulo para cada modelo
+
   Map<String, Object?> toMap() {
     var map = <String, Object?>{};
     map['slo_id'] = slo_id;

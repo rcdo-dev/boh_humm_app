@@ -33,16 +33,7 @@ class ConnectionSQlite implements IConnectionDb<Database> {
           slo_date TEXT NOT NULL,
           slo_value REAL,
           slo_mot_id INTEGER UNIQUE NOT NULL,
-          FOREIGN KEY (slo_mot_id) REFERENCES slope (mot_id)
-          );
-          ''',
-        );
-        await db.execute(
-          '''
-          CREATE TABLE delivery(
-          del_id INTEGER PRIMARY KEY AUTOINCREMENT,
-          del_order INTEGER,
-          del_fee REAL
+          FOREIGN KEY (slo_mot_id) REFERENCES motoboy (mot_id)
           );
           ''',
         );
@@ -51,10 +42,19 @@ class ConnectionSQlite implements IConnectionDb<Database> {
           CREATE TABLE delivery_route(
           delr_id INTEGER PRIMARY KEY AUTOINCREMENT,
           delr_identifier INTEGER,
-          delr_del_id INTEGER NOT NULL,
           delr_slo_id INTEGER NOT NULL,
-          FOREIGN KEY (delr_del_id) REFERENCES delivery (del_id),
           FOREIGN KEY (delr_slo_id) REFERENCES slope (slo_id)
+          );
+          ''',
+        );
+        await db.execute(
+          '''
+          CREATE TABLE delivery(
+          del_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          del_order INTEGER,
+          del_fee REAL,
+          del_delr_id INTEGER NOT NULL,
+          FOREIGN KEY (del_delr_id) REFERENCES delivery_route (delr_id)
           );
           ''',
         );
