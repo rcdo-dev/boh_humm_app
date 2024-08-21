@@ -139,7 +139,7 @@ void main() {
 
   group('CRUD Motoboy by MotoboyDao class', () {
     test(
-      'You must insert the data of a Motoboy object into the database.',
+      'Must insert the data of a Motoboy object into the database.',
       () async {
         int? lastId = await motoboyDao.insert(data: motoboy);
         print(lastId);
