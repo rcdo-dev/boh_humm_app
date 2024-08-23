@@ -1,10 +1,12 @@
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
 import 'package:boh_humm/core/data_access/connection_db/i_connection_db.dart';
 import 'package:boh_humm/core/data_access/dao/i_dao.dart';
 import 'package:boh_humm/features/delivery/model/delivery_model.dart';
 import 'package:boh_humm/main.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class DeliveryDao implements IDao<DeliveryModel> {
   final IConnectionDb connectionDb;
@@ -23,14 +25,14 @@ class DeliveryDao implements IDao<DeliveryModel> {
           "INSERT INTO delivery(del_order, del_fee, del_delr_id) values (?, ?, ?)",
           [data.del_order, data.del_fee, data.del_delr_id],
         );
-        database.close();
+
         return lastId;
       } catch (e, s) {
-        database.close();
         print('Exception: $e\n\nStackTrace: $s');
+      } finally {
+        database.close();
       }
     }
-    database.close();
     return null;
   }
 
@@ -42,15 +44,13 @@ class DeliveryDao implements IDao<DeliveryModel> {
     try {
       list = await database.rawQuery("SELECT * FROM delivery");
       if (list.isNotEmpty) {
-        database.close();
         return list;
       }
-      database.close();
     } catch (e, s) {
-      database.close();
       print('Exception: $e\n\nStackTrace: $s');
+    } finally {
+      database.close();
     }
-    database.close();
     return null;
   }
 
@@ -65,17 +65,14 @@ class DeliveryDao implements IDao<DeliveryModel> {
           [id],
         );
         if (result.isNotEmpty) {
-          database.close();
           return DeliveryModel.fromMap(result.first);
         }
-        database.close();
-        return null;
       } catch (e, s) {
-        database.close();
         print('Exception: $e\n\nStackTrace: $s');
+      } finally {
+        database.close();
       }
     }
-    database.close();
     return null;
   }
 
@@ -88,13 +85,12 @@ class DeliveryDao implements IDao<DeliveryModel> {
         "UPDATE delivery SET del_order = ?, del_fee = ? WHERE del_id = ?",
         [data.del_order, data.del_fee, data.del_id],
       );
-      database.close();
       return amountChanges;
     } catch (e, s) {
-      database.close();
       print('Exception: $e\n\nStackTrace: $s');
+    } finally {
+      database.close();
     }
-    database.close();
     return null;
   }
 
@@ -107,13 +103,12 @@ class DeliveryDao implements IDao<DeliveryModel> {
         "DELETE FROM delivery WHERE del_id = ?",
         [data.del_id],
       );
-      database.close();
       return amountChanges;
     } catch (e, s) {
-      database.close();
       print('Exception: $e\n\nStackTrace: $s');
+    } finally {
+      database.close();
     }
-    database.close();
     return null;
   }
 }
@@ -132,9 +127,9 @@ void main() {
     databaseFactory = databaseFactoryFfi;
 
     delivery = DeliveryModel(
-      del_order: 346,
-      del_fee: 11,
-      del_delr_id: 2,
+      del_order: 389,
+      del_fee: 12,
+      del_delr_id: 3,
     );
 
     connection = Modular.get<IConnectionDb>();

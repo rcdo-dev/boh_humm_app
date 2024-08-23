@@ -129,8 +129,8 @@ void main() {
   });
 
   MotoboyModel motoboy = MotoboyModel(
-    mot_name: 'rcdo2 dev',
-    mot_email: 'rcdo2.dev@gmail.com',
+    mot_name: 'Ricardo',
+    mot_email: 'rcdo.dev@gmail.com',
     mot_image: Uint8List.fromList([0, 1, 2, 3, 4]),
   );
 
@@ -166,7 +166,7 @@ void main() {
       var id = await motoboyDao.update(
         data: MotoboyModel(
           mot_name: 'Ricardo',
-          mot_email: 'rcpompeo@gmail.com',
+          mot_email: 'rcdo.dev@gmail.com',
           mot_image: Uint8List.fromList(
             [4, 3, 2, 1],
           ),

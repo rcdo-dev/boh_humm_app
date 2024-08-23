@@ -21,33 +21,32 @@ class DeliveryDao implements IDao<DeliveryModel> {
           "INSERT INTO delivery(del_order, del_fee, del_delr_id) values (?, ?, ?)",
           [data.del_order, data.del_fee, data.del_delr_id],
         );
-        database.close();
+
         return lastId;
       } catch (e, s) {
-        print('Exception: $e, StackTrace: $s');
+        print('Exception: $e\n\nStackTrace: $s');
+      } finally {
+        database.close();
       }
     }
-    database.close();
     return null;
   }
 
   @override
   Future<List<Map>?> getAll() async {
     Database database = await connectionDb.connectionDatabase();
-    var list = <Map>[];
+    var list = <Map<String, Object?>>[];
 
     try {
       list = await database.rawQuery("SELECT * FROM delivery");
       if (list.isNotEmpty) {
-        database.close();
         return list;
       }
-      database.close();
     } catch (e, s) {
+      print('Exception: $e\n\nStackTrace: $s');
+    } finally {
       database.close();
-      print('Exception: $e, StackTrace: $s');
     }
-    database.close();
     return null;
   }
 
@@ -61,20 +60,15 @@ class DeliveryDao implements IDao<DeliveryModel> {
           "SELECT * FROM delivery WHERE del_id =?",
           [id],
         );
-
         if (result.isNotEmpty) {
-          database.close();
           return DeliveryModel.fromMap(result.first);
-        } else {
-          database.close();
-          return null;
         }
       } catch (e, s) {
+        print('Exception: $e\n\nStackTrace: $s');
+      } finally {
         database.close();
-        print('Exception: $e, StackTrace: $s');
       }
     }
-    database.close();
     return null;
   }
 
@@ -83,17 +77,16 @@ class DeliveryDao implements IDao<DeliveryModel> {
     Database database = await connectionDb.connectionDatabase();
 
     try {
-      int id = await database.rawUpdate(
+      int amountChanges = await database.rawUpdate(
         "UPDATE delivery SET del_order = ?, del_fee = ? WHERE del_id = ?",
         [data.del_order, data.del_fee, data.del_id],
       );
-      database.close();
-      return id;
+      return amountChanges;
     } catch (e, s) {
+      print('Exception: $e\n\nStackTrace: $s');
+    } finally {
       database.close();
-      print('Exception: $e, StackTrace: $s');
     }
-    database.close();
     return null;
   }
 
@@ -102,17 +95,16 @@ class DeliveryDao implements IDao<DeliveryModel> {
     Database database = await connectionDb.connectionDatabase();
 
     try {
-      int id = await database.rawDelete(
+      int amountChanges = await database.rawDelete(
         "DELETE FROM delivery WHERE del_id = ?",
         [data.del_id],
       );
-      database.close();
-      return id;
+      return amountChanges;
     } catch (e, s) {
+      print('Exception: $e\n\nStackTrace: $s');
+    } finally {
       database.close();
-      print('Exception: $e, StackTrace: $s');
     }
-    database.close();
     return null;
   }
 }

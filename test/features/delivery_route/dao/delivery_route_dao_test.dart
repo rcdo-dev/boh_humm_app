@@ -1,10 +1,12 @@
+import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
 import 'package:boh_humm/core/data_access/connection_db/i_connection_db.dart';
 import 'package:boh_humm/core/data_access/dao/i_dao.dart';
 import 'package:boh_humm/features/delivery_route/model/delivery_route_model.dart';
 import 'package:boh_humm/main.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class DeliveryRouteDao implements IDao<DeliveryRouteModel> {
   final IConnectionDb connectionDb;
@@ -23,14 +25,13 @@ class DeliveryRouteDao implements IDao<DeliveryRouteModel> {
           "INSERT INTO delivery_route(delr_identifier, delr_slo_id) values (?, ?)",
           [data.delr_identifier, data.delr_slo_id],
         );
-        database.close();
         return lastId;
       } catch (e, s) {
-        database.close();
         print('Exception: $e\n\nStackTrace: $s');
+      } finally {
+        database.close();
       }
     }
-    database.close();
     return null;
   }
 
@@ -42,16 +43,14 @@ class DeliveryRouteDao implements IDao<DeliveryRouteModel> {
     try {
       list = await database.rawQuery("SELECT * FROM delivery_route");
       if (list.isNotEmpty) {
-        database.close();
         return list;
       }
-      database.close();
       return null;
     } catch (e, s) {
-      database.close();
       print('Exception: $e\n\nStackTrace: $s');
+    } finally {
+      database.close();
     }
-    database.close();
     return null;
   }
 
@@ -66,17 +65,15 @@ class DeliveryRouteDao implements IDao<DeliveryRouteModel> {
           [id],
         );
         if (result.isNotEmpty) {
-          database.close();
           return DeliveryRouteModel.fromMap(result.first);
         }
-        database.close();
         return null;
       } catch (e, s) {
-        database.close();
         print('Exception: $e\n\nStackTrace: $s');
+      } finally {
+        database.close();
       }
     }
-    database.close();
     return null;
   }
 
@@ -96,13 +93,12 @@ class DeliveryRouteDao implements IDao<DeliveryRouteModel> {
         "DELETE FROM delivery_route WHERE delr_id = ?",
         [data.delr_id],
       );
-      database.close();
       return amountChanges;
     } catch (e, s) {
-      database.close();
       print('Exception: $e\n\nStackTrace: $s');
+    } finally {
+      database.close();
     }
-    database.close();
     return null;
   }
 }
@@ -124,7 +120,7 @@ void main() {
     deliveryRouteDao = DeliveryRouteDao(connectionDb: connection);
 
     deliveryRouteModel = DeliveryRouteModel(
-      delr_identifier: 3,
+      delr_identifier: 5,
       delr_slo_id: 1,
     );
   });
@@ -158,7 +154,7 @@ void main() {
 
     test('Must delete a DeliveryRoute object.', () async {
       DeliveryRouteModel deliveryRouteDelete = DeliveryRouteModel(
-        delr_id: 1,
+        delr_id: 2,
       );
 
       int? amount = await deliveryRouteDao.delete(data: deliveryRouteDelete);

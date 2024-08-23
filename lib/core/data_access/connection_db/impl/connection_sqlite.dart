@@ -7,7 +7,7 @@ class ConnectionSQlite implements IConnectionDb<Database> {
   @override
   Future<Database> connectionDatabase() async {
     var documentDirectoryPath = await getDatabasesPath();
-    var path = join(documentDirectoryPath, 'app_motoboy.db');
+    var path = join(documentDirectoryPath, 'boh_humm.db');
 
     return await openDatabase(
       path,
@@ -54,7 +54,7 @@ class ConnectionSQlite implements IConnectionDb<Database> {
           del_order INTEGER,
           del_fee REAL,
           del_delr_id INTEGER NOT NULL,
-          FOREIGN KEY (del_delr_id) REFERENCES delivery_route (delr_id)
+          FOREIGN KEY (del_delr_id) REFERENCES delivery_route (delr_id) ON DELETE CASCADE
           );
           ''',
         );
