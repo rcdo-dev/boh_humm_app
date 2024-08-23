@@ -17,7 +17,7 @@ class DeliveryDao implements IDao<DeliveryModel> {
 
     if (data != null) {
       try {
-        int? lastId = await database.rawInsert(
+        int lastId = await database.rawInsert(
           "INSERT INTO delivery(del_order, del_fee, del_delr_id) values (?, ?, ?)",
           [data.del_order, data.del_fee, data.del_delr_id],
         );
